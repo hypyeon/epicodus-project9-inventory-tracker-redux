@@ -5,10 +5,11 @@ By [Hayeong Pyeon](https://www.hayeong.website)
 ## Table of Contents
 1. [Technologies Used](#technologies-used)
 2. [Description](#description)
-3. [Setup Requirements](#setup-requirements)
-4. [Link](#link)
-5. [Known Bugs](#known-bugs)
-6. [License](#license)
+3. [Planning Application](#planning-application)
+4. [Setup Requirements](#setup-requirements)
+5. [Github Pages](#github-pages)
+6. [Known Bugs](#known-bugs)
+7. [License](#license)
 
 ## Technologies used
 - HTML5, SCSS, JavaScript
