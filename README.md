@@ -1,4 +1,4 @@
-# Local Business Inventory Tracker
+# Icecream Inventory Tracker 🍦
 
 By [Hayeong Pyeon](https://www.hayeong.website)
 
@@ -12,9 +12,9 @@ By [Hayeong Pyeon](https://www.hayeong.website)
 7. [License](#license)
 
 ## Technologies used
-- HTML5, SCSS, JavaScript
+- HTML, SCSS, JavaScript
 - Webpack, Node.js
-- React
+- React (JSX, PropTypes)
 
 ## Description
 - This is an independent project provided from Epicodus.
@@ -22,9 +22,8 @@ By [Hayeong Pyeon](https://www.hayeong.website)
 
 ## Planning Application 
 ### Diagram 
-![Inventory Tracker Diagram](./src/img/InventoryTracker.jpg)
-
-### Wireframinng 
+![Inventory Tracker Diagram](./src/img/inventorytracker-diagram.jpg)
+### Wireframing 
 ![Inventory Tracker Wireframe](./src/img/inventorytracker-wireframe.png)
 
 ## Setup Requirements
