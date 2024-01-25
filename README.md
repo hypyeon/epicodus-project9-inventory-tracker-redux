@@ -13,32 +13,30 @@ By [Hayeong Pyeon](https://www.hayeong.website)
 
 ## Technologies used
 - HTML5, SCSS, JavaScript
-- Webpack, npm
+- Webpack, Node.js
 - React
 
 ## Description
 - This is an independent project provided from Epicodus.
-- This project is to review course **React Fundamentals**.
+- This project is to review **React Fundamentals** course.
 
 ## Planning Application 
-
 ### Diagram 
 ![Inventory Tracker Diagram](./src/img/InventoryTracker.jpg)
 
-### Design & Structure 
-*to be updated*
+### Wireframinng 
+![Inventory Tracker Wireframe](./src/img/inventorytracker-wireframe.png)
 
 ## Setup Requirements
 1. Clone this repository to your desktop and open it with a text editor.
 2. Install all packages with `npm install`.
-3. Build the project using webpack with `npm run build`.
-4. Start a development server with `npm run start`.
+3. Start a development server with `npm run start`.
 
 ## Github Pages
 *to be updated*
 
 ## Known Bugs
-- *Application under development as of Jan 24, 2024*
+- *Application under development as of Jan 25, 2024*
 
 ## License
 [MIT](/LICENSE.txt) Copyright © 2024 Hayeong Pyeon
