@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,600;8..144,700&display=swap');
+$primaryFont: 'Lobster', sans-serif;
+$secondaryFont: 'Roboto Flex', sans-serif;;
+/*
+$primaryColor: ;
+$secondaryColor: ;
+*/
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin textNoStyle {
+    text-decoration: none;
+    list-style: none;
+    color: black;
+    &:visited {
+        text-decoration: none;
+    }
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+header {
+    font-family: $primaryFont;
+    height: 15vh;
+    @include flex-center;
+    h1 {
+        font-size: 3.5rem;
+        color: rgb(254, 109, 184);
+        text-shadow: 1px 1px 1px rgb(100, 100, 100);
+    }
+}
+body {
+    background-color: rgb(255, 234, 237);
+}
+.flex {
+    display: flex;
+}
+.col {
+    flex-direction: column;
+}
+.row {
+    flex-direction: row;
+}
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+.textNoStyle {
+    @include textNoStyle;
+}
+.relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+}
