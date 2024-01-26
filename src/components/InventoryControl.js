@@ -11,11 +11,18 @@ export default class InventoryControl extends React.Component {
             orderSold: false
         }
     }
+    handleSellBtn = () => {
+        this.setState({
+            orderSold: true
+        });
+        console.log("Sell btn clicked")
+    }
     handleAddBtn = (flavor) => {
         const newOrderInitiated = this.state.orderInitiated.concat(flavor);
         this.setState({
             orderInitiated: newOrderInitiated
         });
+        console.log("Add btn clicked")
     }
     handleCancelBtn = (flavor) => {
         const cancelInitiatedOrder = this.state.orderInitiated.filter(item => item != flavor);
@@ -23,28 +30,34 @@ export default class InventoryControl extends React.Component {
             orderInitiated: cancelInitiatedOrder
         });
     }
-    handleSellBtn = () => {
-        this.setState({
-            orderSold: true
-        });
-    }
 
     render() {
-        let itemToUpdate = null;
+        let itemsToUpdate = [];
+        let quantityLeft = 130;
+
         const initiatedOrderList = this.state.orderInitiated;
 
         if (initiatedOrderList.length >= 1) {
             for (let i = 0; i < initiatedOrderList.length; i++) {
-                itemToUpdate = <InventoryUpdate flavor={initiatedOrderList[i]} onClick={this.handleCancelBtn} />
+                itemsToUpdate.push(
+                    <InventoryUpdate 
+                        key={i}
+                        flavor={initiatedOrderList[i]} 
+                        onClickCancel={this.handleCancelBtn} />
+                )
             }
+        }
+        if (this.state.orderSold) {
+            quantityLeft -= 1;
         }
 
         return (
             <React.Fragment>
                 <main>
-                    <InventoryList onClickingAdd={this.handleAddBtn} onClickingSell={this.handleSellBtn} />
+                    <InventoryList onClickAdd={this.handleAddBtn} onClickSell={this.handleSellBtn} inStock={quantityLeft} />
                     <div id="orderList">
-                        {itemToUpdate}
+                        <h2>Add Items</h2>
+                        {itemsToUpdate}
                     </div>
                 </main>
             </React.Fragment>

@@ -33,11 +33,11 @@ export default function ItemCover(props) {
     }
     return (
         <React.Fragment>
-            <div class="flavorCover" onClick={props.onClickDetail}>
-                <div class="coverImg">
+            <div className="flavorCover" onClick={props.onClickDetail}>
+                <div className="coverImg">
                     <img src={image}/>
                 </div>
-                <div class="flavorName">
+                <div className="flavorName">
                     <p>{flavor}</p>
                 </div>
             </div>

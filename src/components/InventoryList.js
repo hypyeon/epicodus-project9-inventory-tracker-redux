@@ -4,12 +4,9 @@ import ItemDetail from "./ItemDetail";
 import { v4 } from 'uuid'; 
 
 export default function InventoryList() {
-    const [selectedItemId, setSelectedItemId] = useState(null);
-    const handleDetailClick = (itemId) => {
-        setSelectedItemId(itemId);
-    };
-    const handleDetailClose = () => {
-        setSelectedItemId(null);
+    const [showDetail, setShowDetail] = useState(false);
+    const handleDetailToggle = () => {
+      setShowDetail(!showDetail);
     };
     const inventoryItems = [
         { id: v4(), flavor: "Chocolate", price: 0.75, popularity: "high" },
@@ -25,21 +22,21 @@ export default function InventoryList() {
             <div id="fullList">
                 {inventoryItems.map(item => (
                     <div key={item.id} id={item.flavor}>
-                        {selectedItemId === item.id ? (
+                        {showDetail ? (
                             <ItemDetail 
                                 flavor={item.flavor}
                                 price={item.price}
                                 popularity={item.popularity}
-                                onClickClose={handleDetailClose}
+                                onClickClose={handleDetailToggle}
                             />
                         ) : (
                             <ItemCover 
                                 flavor={item.flavor}
-                                onClickDetail={() => handleDetailClick(item.id)}
+                                onClickDetail={handleDetailToggle}
                             />
                         )}
                     </div>
-                ))};
+                ))}
             </div>
         </div>
     );

@@ -16,7 +16,7 @@ export default function InventoryUpdate(props) {
                     <p>Bucket to add: <input type="number"></input></p>
                 </div>
                 <div>
-                    <button onClick={props.clickingCancel}>Cancel</button>
+                    <button onClick={props.onClickCancel}>Cancel</button>
                 </div>
             </div>
         </React.Fragment>
@@ -24,5 +24,6 @@ export default function InventoryUpdate(props) {
 }
 
 InventoryUpdate.propTypes = {
-    flavor: PropTypes.string
+    flavor: PropTypes.string.isRequired,
+    onClickCancel: PropTypes.func
 }

@@ -49,7 +49,7 @@ main #inventory {
   border-radius: 25px;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 3.5rem;
   justify-content: flex-start;
   align-items: center;
   padding: 2rem;
@@ -85,17 +85,70 @@ main #inventory #fullList #cookies {
 main #inventory #fullList .flavorCover {
   box-shadow: 2px 2px 2px gray;
   border-radius: 15px;
-  width: 8rem;
-  height: 8rem;
+  width: 10rem;
+  height: 10rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   cursor: pointer;
 }
+main #inventory #fullList .flavorDetail {
+  box-shadow: inset 2px 2px 2px gray;
+  border-radius: 15px;
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+main #inventory #fullList .flavorDetail p {
+  font-size: 0.85rem;
+  margin-bottom: 0.15rem;
+}
+main #inventory #fullList .flavorDetail .threeBtns {
+  margin-top: 1rem;
+}
+main #inventory #fullList .flavorDetail .threeBtns .btn-purple {
+  background-color: rgba(176, 0, 235, 0.3);
+  cursor: pointer;
+  margin-right: 0.25rem;
+}
+main #inventory #fullList .flavorDetail .threeBtns .btn-purple:hover {
+  background-color: rgba(193, 0, 193, 0.75);
+  color: white;
+}
+main #inventory #fullList .flavorDetail .threeBtns .btn-yellow {
+  background-color: rgba(255, 255, 27, 0.3);
+  cursor: pointer;
+  margin-right: 0.25rem;
+}
+main #inventory #fullList .flavorDetail .threeBtns .btn-yellow:hover {
+  background-color: rgba(147, 110, 0, 0.75);
+  color: white;
+}
+main #inventory #fullList .flavorDetail .threeBtns .btn-gray {
+  background-color: rgba(128, 128, 128, 0.3);
+  cursor: pointer;
+}
+main #inventory #fullList .flavorDetail .threeBtns .btn-gray:hover {
+  background-color: gray;
+  color: white;
+}
 main #orderList {
   width: 25vw;
   height: 60vh;
   background-color: white;
   border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+}
+main #orderList h2 {
+  font-family: "Lobster", sans-serif;
+  color: rgba(128, 128, 128, 0.75);
+  font-size: 2.5rem;
 }/*# sourceMappingURL=index.css.map */

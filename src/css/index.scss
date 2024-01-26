@@ -6,6 +6,13 @@ $secondaryFont: 'Roboto Flex', sans-serif;;
 $primaryColor: ;
 $secondaryColor: ;
 */
+@mixin itemStyle {
+    border-radius: 15px;
+    width: 10rem;
+    height: 10rem;
+    @include flex-center;
+    flex-direction: column;
+}
 @mixin flex-center {
     display: flex;
     justify-content: center;
@@ -64,7 +71,7 @@ main {
         @include cardStyle;
         display: flex;
         flex-direction: column;
-        gap: 5rem;
+        gap: 3.5rem;
         justify-content: flex-start;
         align-items: center;
         padding: 2rem;
@@ -94,17 +101,60 @@ main {
             }
             .flavorCover {
                 box-shadow: 2px 2px 2px gray;
-                border-radius: 15px;
-                width: 8rem;
-                height: 8rem;
-                @include flex-center;
-                flex-direction: column;
+                @include itemStyle;
                 cursor: pointer;
+            }
+            .flavorDetail {
+                box-shadow: inset 2px 2px 2px gray;
+                @include itemStyle;
+                p {
+                    font-size: .85rem;
+                    margin-bottom: .15rem;
+                }
+                .threeBtns {
+                    margin-top: 1rem;
+                    .btn-purple {
+                        background-color: rgba(176, 0, 235, 0.3);
+                        cursor: pointer;
+                        margin-right: .25rem;
+                        &:hover {
+                            background-color: rgba(193, 0, 193, 0.75);
+                            color: white;
+                        }
+                    }
+                    .btn-yellow {
+                        background-color: rgba(255, 255, 27, 0.3);
+                        cursor: pointer;
+                        margin-right: .25rem;
+                        &:hover {
+                            background-color: rgba(147, 110, 0, 0.75);
+                            color: white;
+                        }
+                    }
+                    .btn-gray {
+                        background-color: rgba(128, 128, 128, 0.3);
+                        cursor: pointer;
+                        &:hover {
+                            background-color: gray;
+                            color: white;
+                        }
+                    }
+                }
             }
         }
     }
     #orderList {
         width: 25vw;
         @include cardStyle;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 2rem;
+        h2 {
+            font-family: $primaryFont;
+            color: rgba(128, 128, 128, 0.75);
+            font-size: 2.5rem;
+        }
     }
 }
