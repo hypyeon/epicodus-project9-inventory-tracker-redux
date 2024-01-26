@@ -30,12 +30,72 @@ body {
 
 main {
   height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  font-family: "Roboto Flex", sans-serif;
+}
+main button {
+  font-family: "Roboto Flex", sans-serif;
+  padding: 0.2rem 0.45rem;
+  border: none;
+  border-radius: 15px;
 }
 main #inventory {
-  width: 60vw;
-  height: 70vh;
+  width: 45vw;
+  height: 60vh;
+  background-color: white;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+}
+main #inventory h2 {
+  font-family: "Lobster", sans-serif;
+  color: rgba(128, 128, 128, 0.75);
+  font-size: 2.5rem;
+}
+main #inventory #fullList {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-areas: "box1 box2 box3" "box4 box5 box6";
+}
+main #inventory #fullList #chocolate {
+  grid-area: box1;
+}
+main #inventory #fullList #cherry {
+  grid-area: box2;
+}
+main #inventory #fullList #mango {
+  grid-area: box3;
+}
+main #inventory #fullList #watermelon {
+  grid-area: box4;
+}
+main #inventory #fullList #kiwi {
+  grid-area: box5;
+}
+main #inventory #fullList #cookies {
+  grid-area: box6;
+}
+main #inventory #fullList .flavorCover {
+  box-shadow: 2px 2px 2px gray;
+  border-radius: 15px;
+  width: 8rem;
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
 }
 main #orderList {
   width: 25vw;
-  height: 70vh;
+  height: 60vh;
+  background-color: white;
+  border-radius: 25px;
 }/*# sourceMappingURL=index.css.map */

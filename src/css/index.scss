@@ -19,6 +19,11 @@ $secondaryColor: ;
         text-decoration: none;
     }
 }
+@mixin cardStyle {
+    height: 60vh;
+    background-color: white;
+    border-radius: 25px;
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -40,12 +45,66 @@ body {
 }
 main {
     height: 85vh;
+    @include flex-center;
+    gap: 4rem;
+    font-family: $secondaryFont;
+    button {
+        font-family: $secondaryFont;
+        padding: .2rem .45rem;
+        border: none;
+        border-radius: 15px;
+    }
     #inventory {
-        width: 60vw;
-        height: 70vh;
+        h2 {
+            font-family: $primaryFont;
+            color: rgba(128, 128, 128, 0.75);
+            font-size: 2.5rem;
+        }
+        width: 45vw;
+        @include cardStyle;
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 2rem;
+        #fullList {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-areas: 
+                "box1 box2 box3"
+                "box4 box5 box6";
+            #chocolate {
+                grid-area: box1;
+            }
+            #cherry {
+                grid-area: box2;
+            }
+            #mango {
+                grid-area: box3;
+            }
+            #watermelon {
+                grid-area: box4;
+            }
+            #kiwi {
+                grid-area: box5;
+            }
+            #cookies {
+                grid-area: box6;
+            }
+            .flavorCover {
+                box-shadow: 2px 2px 2px gray;
+                border-radius: 15px;
+                width: 8rem;
+                height: 8rem;
+                @include flex-center;
+                flex-direction: column;
+                cursor: pointer;
+            }
+        }
     }
     #orderList {
         width: 25vw;
-        height: 70vh;
+        @include cardStyle;
     }
 }

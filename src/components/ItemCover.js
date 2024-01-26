@@ -9,9 +9,6 @@ import PropTypes from 'prop-types';
 
 export default function ItemCover(props) {
     let { flavor, image } = props;
-    function addCoverStr(word) {
-        return word + "-cover";
-    }
     switch (flavor) {
         case "Chocolate": 
             image = chocolateImg;
@@ -34,18 +31,14 @@ export default function ItemCover(props) {
         default:
             break;
     }
-
     return (
         <React.Fragment>
-            <div id={addCoverStr(flavor)} class="flavorCover">
+            <div class="flavorCover" onClick={props.onClickDetail}>
                 <div class="coverImg">
                     <img src={image}/>
                 </div>
                 <div class="flavorName">
                     <p>{flavor}</p>
-                </div>
-                <div>
-                    <button class="detail-btn" onClick={props.clickingDetail}>Detail</button>
                 </div>
             </div>
         </React.Fragment>
@@ -55,5 +48,5 @@ export default function ItemCover(props) {
 ItemCover.propTypes = {
     flavor: PropTypes.string.isRequired,
     image: PropTypes.string,
-    clickingDetail: PropTypes.func
+    onClickDetail: PropTypes.func.isRequired
 };

@@ -1,53 +1,46 @@
 import React, { useState } from 'react';
 import ItemCover from "./ItemCover";
 import ItemDetail from "./ItemDetail";
+import { v4 } from 'uuid'; 
 
 export default function InventoryList() {
-    const [showDetails, setShowDetails] = useState(false);
-    const handleDetailClick = () => {
-        setShowDetails(!showDetails);
+    const [selectedItemId, setSelectedItemId] = useState(null);
+    const handleDetailClick = (itemId) => {
+        setSelectedItemId(itemId);
     };
+    const handleDetailClose = () => {
+        setSelectedItemId(null);
+    };
+    const inventoryItems = [
+        { id: v4(), flavor: "Chocolate", price: 0.75, popularity: "high" },
+        { id: v4(), flavor: "Cherry", price: 1.25, popularity: "medium" },
+        { id: v4(), flavor: "Mango", price: 1.25, popularity: "high" },
+        { id: v4(), flavor: "Watermelon", price: 0.50, popularity: "medium" },
+        { id: v4(), flavor: "Kiwi", price: 1.00, popularity: "low" },
+        { id: v4(), flavor: "Cookies", price: 0.75, popularity: "high" }
+    ]
     return (
         <div id="inventory">
             <h2>Inventory</h2>
             <div id="fullList">
-                <div id="chocolate">
-                    {showDetails ? null : <ItemCover flavor="Chocolate" clickingDetail={handleDetailClick}/>}
-                    {showDetails && (
-                        <ItemDetail flavor="chocolate" price="0.75" popularity="high" onClickingClose={handleDetailClick} />
-                    )}
-                </div>
-                <div id="cherry">
-                    {showDetails ? null : <ItemCover flavor="Cherry" clickingDetail={handleDetailClick}/>}
-                    {showDetails && (
-                        <ItemDetail flavor="cherry" price="1.25" popularity="medium" onClickingClose={handleDetailClick} />
-                    )}
-                </div>
-                <div id="mango">
-                    {showDetails ? null : <ItemCover flavor="Mango" clickingDetail={handleDetailClick}/>}
-                    {showDetails && (
-                        <ItemDetail flavor="mango" price="1.25" popularity="high" onClickingClose={handleDetailClick} />
-                    )}
-                </div>
-                <div id="watermelon">
-                    {showDetails ? null : <ItemCover flavor="Watermelon" clickingDetail={handleDetailClick}/>}
-                    {showDetails && (
-                        <ItemDetail flavor="watermelon" price="0.50" popularity="medium" onClickingClose={handleDetailClick} />
-                    )}
-                </div>
-                <div id="kiwi">
-                    {showDetails ? null : <ItemCover flavor="Kiwi" clickingDetail={handleDetailClick}/>}
-                    {showDetails && (
-                        <ItemDetail flavor="kiwi" price="1.00" popularity="low" onClickingClose={handleDetailClick} />
-                    )}
-                </div>
-                <div id="cookies">
-                    {showDetails ? null : <ItemCover flavor="Cookies" clickingDetail={handleDetailClick}/>}
-                    {showDetails && (
-                        <ItemDetail flavor="cookies" price="0.75" popularity="high" onClickingClose={handleDetailClick} />
-                    )}
-                </div>
+                {inventoryItems.map(item => (
+                    <div key={item.id} id={item.flavor}>
+                        {selectedItemId === item.id ? (
+                            <ItemDetail 
+                                flavor={item.flavor}
+                                price={item.price}
+                                popularity={item.popularity}
+                                onClickClose={handleDetailClose}
+                            />
+                        ) : (
+                            <ItemCover 
+                                flavor={item.flavor}
+                                onClickDetail={() => handleDetailClick(item.id)}
+                            />
+                        )}
+                    </div>
+                ))};
             </div>
         </div>
-    )
+    );
 }
