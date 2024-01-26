@@ -25,38 +25,17 @@ header h1 {
 
 body {
   background-color: rgb(255, 234, 237);
+  font-family: "Roboto Flex", sans-serif;
 }
 
-.flex {
-  display: flex;
+main {
+  height: 85vh;
 }
-
-.col {
-  flex-direction: column;
+main #inventory {
+  width: 60vw;
+  height: 70vh;
 }
-
-.row {
-  flex-direction: row;
-}
-
-.flex-center {
-  justify-content: center;
-  align-items: center;
-}
-
-.textNoStyle {
-  text-decoration: none;
-  list-style: none;
-  color: black;
-}
-.textNoStyle:visited {
-  text-decoration: none;
-}
-
-.relative {
-  position: relative;
-}
-
-.absolute {
-  position: absolute;
+main #orderList {
+  width: 25vw;
+  height: 70vh;
 }/*# sourceMappingURL=index.css.map */

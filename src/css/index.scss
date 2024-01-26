@@ -36,26 +36,16 @@ header {
 }
 body {
     background-color: rgb(255, 234, 237);
+    font-family: $secondaryFont;
 }
-.flex {
-    display: flex;
-}
-.col {
-    flex-direction: column;
-}
-.row {
-    flex-direction: row;
-}
-.flex-center {
-    justify-content: center;
-    align-items: center;
-}
-.textNoStyle {
-    @include textNoStyle;
-}
-.relative {
-    position: relative;
-}
-.absolute {
-    position: absolute;
+main {
+    height: 85vh;
+    #inventory {
+        width: 60vw;
+        height: 70vh;
+    }
+    #orderList {
+        width: 25vw;
+        height: 70vh;
+    }
 }
