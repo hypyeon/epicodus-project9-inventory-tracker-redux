@@ -21,9 +21,9 @@ export default function ItemDetail(props) {
                     <p>Popularity: {popularity}</p>
                 </div>
                 <div class="threeBtns">
-                    <button class="btn-purple" onClick={props.clickingAdd}>Add</button>
-                    <button class="btn-yellow" onClick={props.clickingSell}>Sell</button>
-                    <button class="btn-gray" onClick={props.clickingClose}>Close</button>
+                    <button class="btn-purple" onClickingAdd={props.clickingAdd}>Add</button>
+                    <button class="btn-yellow" onClickingSell={props.clickingSell}>Sell</button>
+                    <button class="btn-gray" onClickingClose={props.clickingClose}>Close</button>
                 </div>
             </div>
         </React.Fragment>

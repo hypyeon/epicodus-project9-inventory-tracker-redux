@@ -12,39 +12,39 @@ export default function InventoryList() {
             <h2>Inventory</h2>
             <div id="fullList">
                 <div id="chocolate">
-                    <ItemCover flavor="Chocolate" onClick={handleDetailClick}/>
+                    {showDetails ? null : <ItemCover flavor="Chocolate" clickingDetail={handleDetailClick}/>}
                     {showDetails && (
-                        <ItemDetail flavor="chocolate" price="0.75" popularity="high" />
+                        <ItemDetail flavor="chocolate" price="0.75" popularity="high" onClickingClose={handleDetailClick} />
                     )}
                 </div>
                 <div id="cherry">
-                    <ItemCover flavor="Cherry" onClick={handleDetailClick}/>
+                    {showDetails ? null : <ItemCover flavor="Cherry" clickingDetail={handleDetailClick}/>}
                     {showDetails && (
-                        <ItemDetail flavor="cherry" price="1.25" popularity="medium" />
+                        <ItemDetail flavor="cherry" price="1.25" popularity="medium" onClickingClose={handleDetailClick} />
                     )}
                 </div>
                 <div id="mango">
-                    <ItemCover flavor="Mango" onClick={handleDetailClick}/>
+                    {showDetails ? null : <ItemCover flavor="Mango" clickingDetail={handleDetailClick}/>}
                     {showDetails && (
-                        <ItemDetail flavor="mango" price="1.25" popularity="high" />
+                        <ItemDetail flavor="mango" price="1.25" popularity="high" onClickingClose={handleDetailClick} />
                     )}
                 </div>
                 <div id="watermelon">
-                    <ItemCover flavor="Watermelon" onClick={handleDetailClick}/>
+                    {showDetails ? null : <ItemCover flavor="Watermelon" clickingDetail={handleDetailClick}/>}
                     {showDetails && (
-                        <ItemDetail flavor="watermelon" price="0.50" popularity="medium" />
+                        <ItemDetail flavor="watermelon" price="0.50" popularity="medium" onClickingClose={handleDetailClick} />
                     )}
                 </div>
                 <div id="kiwi">
-                    <ItemCover flavor="Kiwi" onClick={handleDetailClick}/>
+                    {showDetails ? null : <ItemCover flavor="Kiwi" clickingDetail={handleDetailClick}/>}
                     {showDetails && (
-                        <ItemDetail flavor="kiwi" price="1.00" popularity="low" />
+                        <ItemDetail flavor="kiwi" price="1.00" popularity="low" onClickingClose={handleDetailClick} />
                     )}
                 </div>
                 <div id="cookies">
-                    <ItemCover flavor="Cookies" onClick={handleDetailClick}/>
+                    {showDetails ? null : <ItemCover flavor="Cookies" clickingDetail={handleDetailClick}/>}
                     {showDetails && (
-                        <ItemDetail flavor="cookies" price="0.75" popularity="high" />
+                        <ItemDetail flavor="cookies" price="0.75" popularity="high" onClickingClose={handleDetailClick} />
                     )}
                 </div>
             </div>

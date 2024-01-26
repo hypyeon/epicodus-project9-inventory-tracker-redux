@@ -1,11 +1,13 @@
 import React from 'react';
 import cartImg from '../img/add-inventory.png';
+import PropTypes from 'prop-types';
 
 export default function InventoryUpdate(props) {
     const { flavor } = props;
+    
     return (
         <React.Fragment>
-            <div class="orderList">
+            <div class="order">
                 <div>
                     <img src={cartImg} alt="Added to cart" />
                 </div>
@@ -14,9 +16,13 @@ export default function InventoryUpdate(props) {
                     <p>Bucket to add: <input type="number"></input></p>
                 </div>
                 <div>
-                    <button>Cancel</button>
+                    <button onClick={props.clickingCancel}>Cancel</button>
                 </div>
             </div>
         </React.Fragment>
     )
+}
+
+InventoryUpdate.propTypes = {
+    flavor: PropTypes.string
 }

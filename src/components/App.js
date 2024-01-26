@@ -1,18 +1,12 @@
 import React from 'react';
 import Header from './Header';
-import InventoryList from './InventoryList';
-import InventoryUpdate from './InventoryUpdate';
+import InventoryControl from './InventoryControl';
 
 function App() {
   return (
     <React.Fragment>
       <Header />
-      <main>
-        <InventoryList />
-        <div id="orderList">
-          <InventoryUpdate />
-        </div>
-      </main>
+      <InventoryControl />
     </React.Fragment>
   );
 }

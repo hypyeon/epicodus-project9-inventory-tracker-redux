@@ -8,7 +8,7 @@ import cookiesImg from '../img/flavor-cookies.png';
 import PropTypes from 'prop-types';
 
 export default function ItemCover(props) {
-    const { flavor, image } = props;
+    let { flavor, image } = props;
     function addCoverStr(word) {
         return word + "-cover";
     }
@@ -54,6 +54,6 @@ export default function ItemCover(props) {
 
 ItemCover.propTypes = {
     flavor: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     clickingDetail: PropTypes.func
 };

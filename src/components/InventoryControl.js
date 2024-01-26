@@ -6,33 +6,48 @@ export default class InventoryControl extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            orderCreated: false,
-            orderList: [],
-            sellItem: false,
-            updateInventory: false
+            orderInitiated: [],
+            orderUpdated: [],
+            orderSold: false
         }
     }
-    handleAddBucket = (newItem) => {
-        const addedNewItem = this.state.orderList.concat(newItem);
+    handleAddBtn = (flavor) => {
+        const newOrderInitiated = this.state.orderInitiated.concat(flavor);
         this.setState({
-            orderCreated: true,
-            orderList: addedNewItem
+            orderInitiated: newOrderInitiated
         });
     }
-    handleSellItem = () => {
+    handleCancelBtn = (flavor) => {
+        const cancelInitiatedOrder = this.state.orderInitiated.filter(item => item != flavor);
         this.setState({
-            sellItem: true
+            orderInitiated: cancelInitiatedOrder
         });
     }
-    handleUpdate = () => {
+    handleSellBtn = () => {
         this.setState({
-            updateInventory: true
-        })
+            orderSold: true
+        });
     }
 
     render() {
-        if (this.state.orderCreated) {
+        let itemToUpdate = null;
+        const initiatedOrderList = this.state.orderInitiated;
 
+        if (initiatedOrderList.length >= 1) {
+            for (let i = 0; i < initiatedOrderList.length; i++) {
+                itemToUpdate = <InventoryUpdate flavor={initiatedOrderList[i]} onClick={this.handleCancelBtn} />
+            }
         }
+
+        return (
+            <React.Fragment>
+                <main>
+                    <InventoryList onClickingAdd={this.handleAddBtn} onClickingSell={this.handleSellBtn} />
+                    <div id="orderList">
+                        {itemToUpdate}
+                    </div>
+                </main>
+            </React.Fragment>
+        )
     }
 }
