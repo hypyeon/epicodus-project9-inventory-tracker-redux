@@ -8,48 +8,49 @@ export default class InventoryControl extends React.Component {
         this.state = {
             orderInitiated: [],
             orderUpdated: [],
-            orderSold: false
+            orderSold: false,
+            defaultQty: 130
         }
     }
     handleSellBtn = () => {
-        this.setState({
-            orderSold: true
-        });
-        console.log("Sell btn clicked")
+        this.setState((prevState) => ({
+            orderSold: true,
+            defaultQty: prevState.defaultQty - 1,
+        }));
+        console.log("Sell btn clicked");
     }
     handleAddBtn = (flavor) => {
-        const newOrderInitiated = this.state.orderInitiated.concat(flavor);
-        this.setState({
-            orderInitiated: newOrderInitiated
-        });
-        console.log("Add btn clicked")
+        this.setState((prevState) => ({
+            orderInitiated: [...prevState.orderInitiated, flavor],
+        }));
+        console.log("Add btn clicked");
     }
     handleCancelBtn = (flavor) => {
-        const cancelInitiatedOrder = this.state.orderInitiated.filter(item => item != flavor);
-        this.setState({
-            orderInitiated: cancelInitiatedOrder
-        });
+        this.setState((prevState) => ({
+            orderInitiated: prevState.orderInitiated.filter((item) => item !== flavor),
+        }));
+    }
+    handleUpdateBtn = (order) => {
+        this.setState((prevState) => ({
+            orderUpdated: [...prevState.orderUpdated, order]
+        }));
     }
 
     render() {
-        let itemsToUpdate = [];
-        let quantityLeft = 130;
-
-        const initiatedOrderList = this.state.orderInitiated;
-
-        if (initiatedOrderList.length >= 1) {
-            for (let i = 0; i < initiatedOrderList.length; i++) {
-                itemsToUpdate.push(
-                    <InventoryUpdate 
-                        key={i}
-                        flavor={initiatedOrderList[i]} 
-                        onClickCancel={this.handleCancelBtn} />
-                )
-            }
+        const { orderInitiated, orderUpdated, orderSold, defaultQty } = this.state;
+        const quantityLeft = orderSold ? defaultQty : defaultQty;
+        
+        let itemsToUpdate;
+        if (orderInitiated.length >= 1) {
+            itemsToUpdate = orderInitiated.map((flavor, index) => (
+                <InventoryUpdate key={index} flavor={flavor} onClickCancel={this.handleCancelBtn} />
+            ));
         }
-        if (this.state.orderSold) {
-            quantityLeft -= 1;
+
+        if (orderUpdated.length >= 1) {
+            
         }
+
 
         return (
             <React.Fragment>
@@ -58,6 +59,7 @@ export default class InventoryControl extends React.Component {
                     <div id="orderList">
                         <h2>Add Items</h2>
                         {itemsToUpdate}
+                        <button id="updateBtn" onClick={this.handleUpdateBtn}>Update Inventory</button>
                     </div>
                 </main>
             </React.Fragment>
