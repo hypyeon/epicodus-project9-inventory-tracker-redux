@@ -1,65 +1,94 @@
 import React from 'react';
-import InventoryList from './InventoryList';
-import InventoryUpdate from './InventoryUpdate';
+import { inventoryItems } from './InventoryList';
+import { ItemCover, ItemDetail } from './ItemCreator';
+// import InventoryUpdate from './InventoryUpdate';
 
 export default class InventoryControl extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            orderInitiated: [],
-            orderUpdated: [],
-            orderSold: false,
-            defaultQty: 130
+            inStockValues: inventoryItems.reduce((acc, item) => {
+                acc[item.flavor] = 130;
+                return acc;
+            }, {}),
+            detailRequested: {}
+        };
+    }
+    handleDetailBtn = (item) => {
+        this.setState((prevState) => {
+            const { detailRequested } = prevState;
+            return {
+                detailRequested: {
+                    ...detailRequested,
+                    [item.flavor]: true
+                }
+            };
+        });
+    }
+    handleCloseBtn = (item) => {
+        this.setState((prevState) => {
+            const { detailRequested } = prevState;
+            return {
+                detailRequested: {
+                    ...detailRequested,
+                    [item.flavor]: false
+                }
+            };
+        });
+    } 
+    handleSellBtn = (item) => {
+        const { inStockValues } = this.state;
+        if (inStockValues[item.flavor] > 0) {
+            const updatedInventoryItems = [...inventoryItems];
+            updatedInventoryItems.forEach((inventoryItem) => {
+                if (inventoryItem.flavor === item.flavor) {
+                    inventoryItem.inStock -= 1;
+                }
+            });
+
+            // saving the new stock value
+            this.setState({
+                inventoryItems: updatedInventoryItems,
+                inStockValues: {
+                    ...inStockValues,
+                    [item.flavor]: inStockValues[item.flavor] - 1
+                }
+            });
         }
-    }
-    handleSellBtn = () => {
-        this.setState((prevState) => ({
-            orderSold: true,
-            defaultQty: prevState.defaultQty - 1,
-        }));
-        console.log("Sell btn clicked");
-    }
-    handleAddBtn = (flavor) => {
-        this.setState((prevState) => ({
-            orderInitiated: [...prevState.orderInitiated, flavor],
-        }));
-        console.log("Add btn clicked");
-    }
-    handleCancelBtn = (flavor) => {
-        this.setState((prevState) => ({
-            orderInitiated: prevState.orderInitiated.filter((item) => item !== flavor),
-        }));
-    }
-    handleUpdateBtn = (order) => {
-        this.setState((prevState) => ({
-            orderUpdated: [...prevState.orderUpdated, order]
-        }));
     }
 
     render() {
-        const { orderInitiated, orderUpdated, orderSold, defaultQty } = this.state;
-        const quantityLeft = orderSold ? defaultQty : defaultQty;
-        
-        let itemsToUpdate;
-        if (orderInitiated.length >= 1) {
-            itemsToUpdate = orderInitiated.map((flavor, index) => (
-                <InventoryUpdate key={index} flavor={flavor} onClickCancel={this.handleCancelBtn} />
-            ));
-        }
+        const { detailRequested, inStockValues } = this.state;
 
-        if (orderUpdated.length >= 1) {
-            
-        }
-
+        const itemList = inventoryItems.map((item) => {
+            const isDetailVisible = detailRequested[item.flavor];
+            return isDetailVisible ? (
+                <ItemDetail 
+                    key={item.id}
+                    flavor={item.flavor}
+                    inStock={inStockValues[item.flavor]}
+                    price={item.price}
+                    popularity={item.popularity}
+                    onClickClose={() => this.handleCloseBtn(item)}
+                    onClickSell={() => this.handleSellBtn(item)}
+                />
+            ) : (
+                <ItemCover 
+                    key={item.id}
+                    flavor={item.flavor}
+                    onClickDetail={() => this.handleDetailBtn(item)}
+                />
+            )
+        })
 
         return (
             <React.Fragment>
                 <main>
-                    <InventoryList onClickAdd={this.handleAddBtn} onClickSell={this.handleSellBtn} inStock={quantityLeft} />
-                    <div id="orderList">
-                        <h2>Add Items</h2>
-                        {itemsToUpdate}
-                        <button id="updateBtn" onClick={this.handleUpdateBtn}>Update Inventory</button>
+                    <div id="inventory">
+                        <h2>Inventory</h2>
+                        <div id="fullList">
+                            {itemList}
+                        </div>
                     </div>
                 </main>
             </React.Fragment>

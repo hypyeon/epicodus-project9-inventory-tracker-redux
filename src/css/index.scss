@@ -81,28 +81,12 @@ main {
             grid-template-areas: 
                 "box1 box2 box3"
                 "box4 box5 box6";
-            #chocolate {
-                grid-area: box1;
-            }
-            #cherry {
-                grid-area: box2;
-            }
-            #mango {
-                grid-area: box3;
-            }
-            #watermelon {
-                grid-area: box4;
-            }
-            #kiwi {
-                grid-area: box5;
-            }
-            #cookies {
-                grid-area: box6;
-            }
             .flavorCover {
                 box-shadow: 2px 2px 2px gray;
                 @include itemStyle;
                 cursor: pointer;
+                gap: 0.75rem;
+                font-size: 1.25rem;
             }
             .flavorDetail {
                 box-shadow: inset 2px 2px 2px gray;
