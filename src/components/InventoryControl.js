@@ -1,7 +1,7 @@
 import React from 'react';
 import { inventoryItems } from './InventoryList';
 import { ItemCover, ItemDetail } from './ItemCreator';
-// import InventoryUpdate from './InventoryUpdate';
+import InventoryUpdate from './InventoryUpdate';
 
 export default class InventoryControl extends React.Component {
     constructor(props) {
@@ -11,7 +11,8 @@ export default class InventoryControl extends React.Component {
                 acc[item.flavor] = 130;
                 return acc;
             }, {}),
-            detailRequested: {}
+            detailRequested: {},
+            itemToAddStock: []
         };
     }
     handleDetailBtn = (item) => {
@@ -56,11 +57,59 @@ export default class InventoryControl extends React.Component {
             });
         }
     }
+    handleAddBtn = (item) => {
+        const { itemToAddStock } = this.state;
+        let alreadyHasIt = false;
+        for (let i = 0; i < itemToAddStock.length; i++) {
+            if (itemToAddStock[i][0] === item.id && itemToAddStock[i][1] === item.flavor) {
+                alreadyHasIt = true;
+                break;
+            }
+        }
+        if (!alreadyHasIt) {
+            const updatedItemToAddStock = [...itemToAddStock, [item.id, item.flavor]];
+            this.setState({
+                itemToAddStock: updatedItemToAddStock
+            });
+        } else {
+            this.setState({
+                itemToAddStock: itemToAddStock
+            });
+        }
+    }
+    handleUpdateBtn = (e, item) => {
+        const { inStockValues } = this.state;
+        const quantity = e.target.value;
+        const updatedInventoryItems = [...inventoryItems];
+        updatedInventoryItems.forEach((inventoryItem) => {
+            if (inventoryItem.flavor === item.flavor) {
+                inventoryItem.inStock += (quantity * 130);
+            }
+        });
+
+        // saving the new stock value
+        this.setState({
+            inventoryItems: updatedInventoryItems,
+            inStockValues: {
+                ...inStockValues,
+                [item.flavor]: inStockValues[item.flavor] + (quantity * 130)
+            }
+        });
+    }
+    handleRemoveBtn = (item) => {
+        this.setState((prevState) => {
+            const { itemToAddStock } = prevState;
+            const updatedItemToAddStock = itemToAddStock.filter((currentItem) => currentItem !== item);
+            return {
+                itemToAddStock: updatedItemToAddStock
+            };
+        });
+    }
 
     render() {
-        const { detailRequested, inStockValues } = this.state;
+        const { detailRequested, inStockValues, itemToAddStock, quantity } = this.state;
 
-        const itemList = inventoryItems.map((item) => {
+        const inventoryList = inventoryItems.map((item) => {
             const isDetailVisible = detailRequested[item.flavor];
             return isDetailVisible ? (
                 <ItemDetail 
@@ -71,6 +120,7 @@ export default class InventoryControl extends React.Component {
                     popularity={item.popularity}
                     onClickClose={() => this.handleCloseBtn(item)}
                     onClickSell={() => this.handleSellBtn(item)}
+                    onClickAdd={() => this.handleAddBtn(item)}
                 />
             ) : (
                 <ItemCover 
@@ -79,7 +129,20 @@ export default class InventoryControl extends React.Component {
                     onClickDetail={() => this.handleDetailBtn(item)}
                 />
             )
-        })
+        });
+
+        let itemList;
+        if (itemToAddStock.length >= 1) {
+            itemList = itemToAddStock.map((item) => (
+                <InventoryUpdate 
+                    key={item[0]}
+                    flavor={item[1]} 
+                    bucketToAdd={quantity}
+                    onClickUpdate={(e) => this.handleUpdateBtn(e, item)}
+                    onClickRemove={() => this.handleRemoveBtn(item)}
+                />
+            ));
+        }
 
         return (
             <React.Fragment>
@@ -87,8 +150,12 @@ export default class InventoryControl extends React.Component {
                     <div id="inventory">
                         <h2>Inventory</h2>
                         <div id="fullList">
-                            {itemList}
+                            {inventoryList}
                         </div>
+                    </div>
+                    <div id='orderList'>
+                        <h2>Add Items</h2>
+                        {itemList}
                     </div>
                 </main>
             </React.Fragment>

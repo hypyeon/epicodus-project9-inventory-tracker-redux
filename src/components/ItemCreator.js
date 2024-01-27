@@ -70,7 +70,10 @@ function ItemDetail(props) {
                     <p>Popularity: {popularity}</p>
                 </div>
                 <div className="threeBtns">
-                    { /* <button className="btn-purple" onClickAdd={props.onClickAdd}>Add</button> */ }
+                    <button 
+                        className="btn-purple" 
+                        onClick={props.onClickAdd}
+                    >Add</button>
                     <button 
                         className="btn-yellow" 
                         onClick={props.onClickSell}
@@ -95,6 +98,7 @@ ItemDetail.propTypes = {
     inStock: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
     popularity: PropTypes.string.isRequired,
+    onClickAdd: PropTypes.func,
     onClickSell: PropTypes.func,
     onClickClose: PropTypes.func
 };
