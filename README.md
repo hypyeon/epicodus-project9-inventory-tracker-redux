@@ -32,10 +32,10 @@ By [Hayeong Pyeon](https://www.hayeong.website)
 3. Start a development server with `npm run start`.
 
 ## Github Pages
-*to be updated*
+https://hypyeon.github.io/epicodus-project8-inventory-tracker/
 
 ## Known Bugs
-- *Application under development as of Jan 25, 2024*
+- No known bug found as of Jan 27, 2024
 
 ## License
 [MIT](/LICENSE.txt) Copyright © 2024 Hayeong Pyeon
