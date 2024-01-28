@@ -67,11 +67,11 @@ main {
             color: rgba(128, 128, 128, 0.75);
             font-size: 2.5rem;
         }
-        width: 45vw;
+        width: 38vw;
         @include cardStyle;
         display: flex;
         flex-direction: column;
-        gap: 5.25rem;
+        gap: 14vh;
         justify-content: flex-start;
         align-items: center;
         padding: 2rem;
@@ -141,7 +141,7 @@ main {
         }
     }
     #orderList {
-        width: 28vw;
+        width: 24vw;
         @include cardStyle;
         display: flex;
         flex-direction: column;
@@ -159,7 +159,7 @@ main {
             gap: 1rem;
             margin-bottom: 1.5rem;
             .order-2 {
-                width: 10vw;
+                width: 7vw;
                 display: flex;
                 flex-direction: column;
                 gap: .25rem;
@@ -179,6 +179,8 @@ main {
                 .updateBtn {
                     background-color: rgba(0, 128, 0, 0.3);
                     cursor: pointer;
+                    transition-duration: .25s;
+                    transition-property: background-color color;
                     &:hover {
                         background-color: rgba(0, 128, 0, 0.85);
                         color: white;
@@ -187,6 +189,8 @@ main {
                 .removeBtn {
                     background-color: rgba(224, 0, 30, 0.3);
                     cursor: pointer;
+                    transition-duration: .25s;
+                    transition-property: background-color color;
                     &:hover {
                         background-color: rgba(224, 0, 30, 0.75);
                         color: white;

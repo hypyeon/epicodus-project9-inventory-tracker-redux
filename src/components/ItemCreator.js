@@ -8,7 +8,7 @@ import cookiesImg from '../img/flavor-cookies.png';
 import PropTypes from 'prop-types';
 
 function ItemCover(props) {
-    const { flavor, inStock } = props;
+    const { flavor } = props;
     let image;
 
     function coverIdMaker(word) {
@@ -16,13 +16,6 @@ function ItemCover(props) {
     }
     function altMaker(word) {
         return word + " Image";
-    }
-    function isOutOfStock(inStock) {
-        if (inStock === 0) {
-            return "block";
-        } else {
-            return "hidden";
-        }
     }
 
     switch (flavor) {

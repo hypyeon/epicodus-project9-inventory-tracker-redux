@@ -43,13 +43,13 @@ main button {
   border-radius: 15px;
 }
 main #inventory {
-  width: 45vw;
+  width: 38vw;
   height: 68vh;
   background-color: white;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
-  gap: 5.25rem;
+  gap: 14vh;
   justify-content: flex-start;
   align-items: center;
   padding: 2rem;
@@ -134,7 +134,7 @@ main #inventory #fullList .flavorDetail .threeBtns .btn-gray:hover {
   color: white;
 }
 main #orderList {
-  width: 28vw;
+  width: 24vw;
   height: 68vh;
   background-color: white;
   border-radius: 25px;
@@ -158,7 +158,7 @@ main #orderList .order {
   margin-bottom: 1.5rem;
 }
 main #orderList .order .order-2 {
-  width: 10vw;
+  width: 7vw;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -179,6 +179,8 @@ main #orderList .order .order-3 {
 main #orderList .order .order-3 .updateBtn {
   background-color: rgba(0, 128, 0, 0.3);
   cursor: pointer;
+  transition-duration: 0.25s;
+  transition-property: background-color color;
 }
 main #orderList .order .order-3 .updateBtn:hover {
   background-color: rgba(0, 128, 0, 0.85);
@@ -187,6 +189,8 @@ main #orderList .order .order-3 .updateBtn:hover {
 main #orderList .order .order-3 .removeBtn {
   background-color: rgba(224, 0, 30, 0.3);
   cursor: pointer;
+  transition-duration: 0.25s;
+  transition-property: background-color color;
 }
 main #orderList .order .order-3 .removeBtn:hover {
   background-color: rgba(224, 0, 30, 0.75);
