@@ -8,7 +8,7 @@ import cookiesImg from '../img/flavor-cookies.png';
 import PropTypes from 'prop-types';
 
 function ItemCover(props) {
-    const { flavor } = props;
+    const { flavor, inStock } = props;
     let image;
 
     function coverIdMaker(word) {
@@ -16,6 +16,13 @@ function ItemCover(props) {
     }
     function altMaker(word) {
         return word + " Image";
+    }
+    function isOutOfStock(inStock) {
+        if (inStock === 0) {
+            return "block";
+        } else {
+            return "hidden";
+        }
     }
 
     switch (flavor) {
@@ -44,10 +51,9 @@ function ItemCover(props) {
     return (
         <React.Fragment>
             <div 
-                className="flavorCover" 
-                onClick={props.onClickDetail}
-                id={coverIdMaker(flavor)}
-            >
+            className="flavorCover" 
+            onClick={props.onClickDetail}
+            id={coverIdMaker(flavor)}>
                 <img src={image} alt={altMaker(flavor)} />
                 <p>{flavor}</p>
             </div>
@@ -56,19 +62,16 @@ function ItemCover(props) {
 }
 
 function ItemDetail(props) {
-    const { flavor, inStock, price, popularity, quantity } = props;
+    const { flavor, inStock, price, popularity } = props;
     function detailIdMaker(word) {
         return word.toLowerCase() + "-detail";
-    }
-    function getStockValue(inStock, quantity) {
-        return inStock + quantity * 130;
     }
     return (
         <React.Fragment>
             <div className="flavorDetail">
                 <div id={detailIdMaker(flavor)}>
                     <p>Flavor: {flavor}</p>
-                    <p>In Stock: {getStockValue(inStock, quantity)} scoops</p>
+                    <p>In Stock: {inStock} scoops</p>
                     <p>Price: ${price}/scoop</p>
                     <p>Popularity: {popularity}</p>
                 </div>
@@ -93,6 +96,7 @@ function ItemDetail(props) {
 
 ItemCover.propTypes = {
     flavor: PropTypes.string.isRequired,
+    inStock: PropTypes.number.isRequired,
     onClickDetail: PropTypes.func
 };
 

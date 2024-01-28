@@ -51,8 +51,10 @@ export default class InventoryControl extends React.Component {
         const { inStockValues } = this.state;
         const updatedValues = { ...inStockValues };
         for (const key in updatedValues) {
-            if (key === item.id) {
-                updatedValues[key] -= 1;
+            if (key === item.id ) {
+                if (updatedValues[key] > 0) {
+                    updatedValues[key] -= 1;
+                }
             }
         }
         this.setState({
@@ -60,10 +62,10 @@ export default class InventoryControl extends React.Component {
         });
     }
     handleAddBtn = (item) => {
-        const { itemToAddStock } = this.state;
+        const { itemToAddStock, inStockValues } = this.state;
         let alreadyHasIt = false;
         for (let i = 0; i < itemToAddStock.length; i++) {
-            if (itemToAddStock[i][0] === item.id) {
+            if (itemToAddStock[i]["id"] === item.id) {
                 alreadyHasIt = true;
                 break;
             }
@@ -82,12 +84,12 @@ export default class InventoryControl extends React.Component {
     handleUpdateBtn = (item) => {
         this.handleAddBucket(item);
 
-        const { inStockValues, quantity } = this.state;
+        const { inStockValues } = this.state;
 
         const updatedValues = { ...inStockValues };
         for (const key in updatedValues) {
             if (key === item.id) {
-                updatedValues[key] += quantity[item.id] * 130;
+                updatedValues[key] += 130;
             }
         }
         this.setState({
@@ -124,6 +126,7 @@ export default class InventoryControl extends React.Component {
 
         const inventoryList = inventoryItems.map((item) => {
             const isDetailVisible = detailRequested[item.flavor];
+
             return isDetailVisible ? (
                 <ItemDetail 
                     key={item.id}
@@ -140,6 +143,7 @@ export default class InventoryControl extends React.Component {
                 <ItemCover 
                     key={item.id}
                     flavor={item.flavor}
+                    inStock={item.inStock}
                     onClickDetail={() => this.handleDetailBtn(item)}
                 />
             )
