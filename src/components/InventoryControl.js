@@ -6,15 +6,25 @@ import InventoryUpdate from './InventoryUpdate';
 export default class InventoryControl extends React.Component {
     constructor(props) {
         super(props);
+
+        const defaultStockValues = {};
+        [...inventoryItems].forEach((item) => {
+            defaultStockValues[item.id] = item.inStock;
+        });
+
+        const quantityToAdd = {};
+        [...inventoryItems].forEach((item) => {
+            quantityToAdd[item.id] = 0;
+        });
+
         this.state = {
-            inStockValues: inventoryItems.reduce((acc, item) => {
-                acc[item.flavor] = 130;
-                return acc;
-            }, {}),
             detailRequested: {},
-            itemToAddStock: []
+            itemToAddStock: [],
+            inStockValues: defaultStockValues,
+            quantity: quantityToAdd
         };
     }
+
     handleDetailBtn = (item) => {
         this.setState((prevState) => {
             const { detailRequested } = prevState;
@@ -39,35 +49,27 @@ export default class InventoryControl extends React.Component {
     } 
     handleSellBtn = (item) => {
         const { inStockValues } = this.state;
-        if (inStockValues[item.flavor] > 0) {
-            const updatedInventoryItems = [...inventoryItems];
-            updatedInventoryItems.forEach((inventoryItem) => {
-                if (inventoryItem.flavor === item.flavor) {
-                    inventoryItem.inStock -= 1;
-                }
-            });
-
-            // saving the new stock value
-            this.setState({
-                inventoryItems: updatedInventoryItems,
-                inStockValues: {
-                    ...inStockValues,
-                    [item.flavor]: inStockValues[item.flavor] - 1
-                }
-            });
+        const updatedValues = { ...inStockValues };
+        for (const key in updatedValues) {
+            if (key === item.id) {
+                updatedValues[key] -= 1;
+            }
         }
+        this.setState({
+            inStockValues: updatedValues
+        });
     }
     handleAddBtn = (item) => {
         const { itemToAddStock } = this.state;
         let alreadyHasIt = false;
         for (let i = 0; i < itemToAddStock.length; i++) {
-            if (itemToAddStock[i][0] === item.id && itemToAddStock[i][1] === item.flavor) {
+            if (itemToAddStock[i][0] === item.id) {
                 alreadyHasIt = true;
                 break;
             }
         }
         if (!alreadyHasIt) {
-            const updatedItemToAddStock = [...itemToAddStock, [item.id, item.flavor]];
+            const updatedItemToAddStock = [...itemToAddStock, item];
             this.setState({
                 itemToAddStock: updatedItemToAddStock
             });
@@ -77,37 +79,48 @@ export default class InventoryControl extends React.Component {
             });
         }
     }
-    handleUpdateBtn = (e, item) => {
-        const { inStockValues } = this.state;
-        const quantity = e.target.value;
-        const updatedInventoryItems = [...inventoryItems];
-        updatedInventoryItems.forEach((inventoryItem) => {
-            if (inventoryItem.flavor === item.flavor) {
-                inventoryItem.inStock += (quantity * 130);
-            }
-        });
+    handleUpdateBtn = (item) => {
+        this.handleAddBucket(item);
 
-        // saving the new stock value
-        this.setState({
-            inventoryItems: updatedInventoryItems,
-            inStockValues: {
-                ...inStockValues,
-                [item.flavor]: inStockValues[item.flavor] + (quantity * 130)
+        const { inStockValues, quantity } = this.state;
+
+        const updatedValues = { ...inStockValues };
+        for (const key in updatedValues) {
+            if (key === item.id) {
+                updatedValues[key] += quantity[item.id] * 130;
             }
+        }
+        this.setState({
+            inStockValues: updatedValues
         });
     }
-    handleRemoveBtn = (item) => {
+    handleAddBucket = (item) => {
+        const { quantity } = this.state;
+
+        const updatedQty = { ...quantity };
+        for (const key in updatedQty) {
+            if (key === item.id) {
+                updatedQty[key] += 1;
+            }
+        }
+        this.setState({
+            quantity: updatedQty
+        });
+    }
+    handleDoneBtn = (item) => {
         this.setState((prevState) => {
             const { itemToAddStock } = prevState;
+
             const updatedItemToAddStock = itemToAddStock.filter((currentItem) => currentItem !== item);
+
             return {
-                itemToAddStock: updatedItemToAddStock
+                itemToAddStock: updatedItemToAddStock,
             };
         });
     }
 
     render() {
-        const { detailRequested, inStockValues, itemToAddStock, quantity } = this.state;
+        const { detailRequested, itemToAddStock, inStockValues, quantity } = this.state;
 
         const inventoryList = inventoryItems.map((item) => {
             const isDetailVisible = detailRequested[item.flavor];
@@ -115,9 +128,10 @@ export default class InventoryControl extends React.Component {
                 <ItemDetail 
                     key={item.id}
                     flavor={item.flavor}
-                    inStock={inStockValues[item.flavor]}
+                    inStock={inStockValues[item.id]}
                     price={item.price}
                     popularity={item.popularity}
+                    quantity={quantity[item.id]}
                     onClickClose={() => this.handleCloseBtn(item)}
                     onClickSell={() => this.handleSellBtn(item)}
                     onClickAdd={() => this.handleAddBtn(item)}
@@ -135,11 +149,11 @@ export default class InventoryControl extends React.Component {
         if (itemToAddStock.length >= 1) {
             itemList = itemToAddStock.map((item) => (
                 <InventoryUpdate 
-                    key={item[0]}
-                    flavor={item[1]} 
-                    bucketToAdd={quantity}
-                    onClickUpdate={(e) => this.handleUpdateBtn(e, item)}
-                    onClickRemove={() => this.handleRemoveBtn(item)}
+                    key={item.id}
+                    flavor={item.flavor} 
+                    quantity={quantity[item.id]}
+                    onClickUpdate={() => this.handleUpdateBtn(item)}
+                    onClickDone={() => this.handleDoneBtn(item)}
                 />
             ));
         }
@@ -153,7 +167,7 @@ export default class InventoryControl extends React.Component {
                             {inventoryList}
                         </div>
                     </div>
-                    <div id='orderList'>
+                    <div id="orderList">
                         <h2>Add Items</h2>
                         {itemList}
                     </div>

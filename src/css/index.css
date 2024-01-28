@@ -44,12 +44,12 @@ main button {
 }
 main #inventory {
   width: 45vw;
-  height: 60vh;
+  height: 68vh;
   background-color: white;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
+  gap: 5.25rem;
   justify-content: flex-start;
   align-items: center;
   padding: 2rem;
@@ -64,26 +64,7 @@ main #inventory #fullList {
   gap: 2.5rem;
   grid-template-areas: "box1 box2 box3" "box4 box5 box6";
 }
-main #inventory #fullList #chocolate {
-  grid-area: box1;
-}
-main #inventory #fullList #cherry {
-  grid-area: box2;
-}
-main #inventory #fullList #mango {
-  grid-area: box3;
-}
-main #inventory #fullList #watermelon {
-  grid-area: box4;
-}
-main #inventory #fullList #kiwi {
-  grid-area: box5;
-}
-main #inventory #fullList #cookies {
-  grid-area: box6;
-}
 main #inventory #fullList .flavorCover {
-  box-shadow: 2px 2px 2px gray;
   border-radius: 15px;
   width: 10rem;
   height: 10rem;
@@ -92,6 +73,16 @@ main #inventory #fullList .flavorCover {
   align-items: center;
   flex-direction: column;
   cursor: pointer;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  transition-duration: 0.5s;
+  transition-property: box-shadow;
+}
+main #inventory #fullList .flavorCover:hover {
+  box-shadow: 2px 2px 2px gray;
+}
+main #inventory #fullList .flavorCover:active {
+  box-shadow: inset 2px 2px 2px gray;
 }
 main #inventory #fullList .flavorDetail {
   box-shadow: inset 2px 2px 2px gray;
@@ -114,6 +105,8 @@ main #inventory #fullList .flavorDetail .threeBtns .btn-purple {
   background-color: rgba(176, 0, 235, 0.3);
   cursor: pointer;
   margin-right: 0.25rem;
+  transition-duration: 0.25s;
+  transition-property: background-color color;
 }
 main #inventory #fullList .flavorDetail .threeBtns .btn-purple:hover {
   background-color: rgba(193, 0, 193, 0.75);
@@ -123,6 +116,8 @@ main #inventory #fullList .flavorDetail .threeBtns .btn-yellow {
   background-color: rgba(255, 255, 27, 0.3);
   cursor: pointer;
   margin-right: 0.25rem;
+  transition-duration: 0.25s;
+  transition-property: background-color color;
 }
 main #inventory #fullList .flavorDetail .threeBtns .btn-yellow:hover {
   background-color: rgba(147, 110, 0, 0.75);
@@ -131,14 +126,16 @@ main #inventory #fullList .flavorDetail .threeBtns .btn-yellow:hover {
 main #inventory #fullList .flavorDetail .threeBtns .btn-gray {
   background-color: rgba(128, 128, 128, 0.3);
   cursor: pointer;
+  transition-duration: 0.25s;
+  transition-property: background-color color;
 }
 main #inventory #fullList .flavorDetail .threeBtns .btn-gray:hover {
   background-color: gray;
   color: white;
 }
 main #orderList {
-  width: 25vw;
-  height: 60vh;
+  width: 28vw;
+  height: 68vh;
   background-color: white;
   border-radius: 25px;
   display: flex;
@@ -151,4 +148,47 @@ main #orderList h2 {
   font-family: "Lobster", sans-serif;
   color: rgba(128, 128, 128, 0.75);
   font-size: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+main #orderList .order {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+main #orderList .order .order-2 {
+  width: 10vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+main #orderList .order .order-2 .input {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+main #orderList .order .order-2 .input input {
+  width: 2.5rem;
+}
+main #orderList .order .order-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+main #orderList .order .order-3 .updateBtn {
+  background-color: rgba(0, 128, 0, 0.3);
+  cursor: pointer;
+}
+main #orderList .order .order-3 .updateBtn:hover {
+  background-color: rgba(0, 128, 0, 0.85);
+  color: white;
+}
+main #orderList .order .order-3 .removeBtn {
+  background-color: rgba(224, 0, 30, 0.3);
+  cursor: pointer;
+}
+main #orderList .order .order-3 .removeBtn:hover {
+  background-color: rgba(224, 0, 30, 0.75);
+  color: white;
 }/*# sourceMappingURL=index.css.map */

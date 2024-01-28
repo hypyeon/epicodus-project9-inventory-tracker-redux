@@ -56,16 +56,19 @@ function ItemCover(props) {
 }
 
 function ItemDetail(props) {
-    const { flavor, inStock, price, popularity } = props;
+    const { flavor, inStock, price, popularity, quantity } = props;
     function detailIdMaker(word) {
         return word.toLowerCase() + "-detail";
+    }
+    function getStockValue(inStock, quantity) {
+        return inStock + quantity * 130;
     }
     return (
         <React.Fragment>
             <div className="flavorDetail">
                 <div id={detailIdMaker(flavor)}>
                     <p>Flavor: {flavor}</p>
-                    <p>In Stock: {inStock} scoops</p>
+                    <p>In Stock: {getStockValue(inStock, quantity)} scoops</p>
                     <p>Price: ${price}/scoop</p>
                     <p>Popularity: {popularity}</p>
                 </div>
@@ -98,6 +101,7 @@ ItemDetail.propTypes = {
     inStock: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
     popularity: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
     onClickAdd: PropTypes.func,
     onClickSell: PropTypes.func,
     onClickClose: PropTypes.func

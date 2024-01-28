@@ -27,7 +27,7 @@ $secondaryColor: ;
     }
 }
 @mixin cardStyle {
-    height: 60vh;
+    height: 68vh;
     background-color: white;
     border-radius: 25px;
 }
@@ -71,7 +71,7 @@ main {
         @include cardStyle;
         display: flex;
         flex-direction: column;
-        gap: 3.5rem;
+        gap: 5.25rem;
         justify-content: flex-start;
         align-items: center;
         padding: 2rem;
@@ -82,11 +82,18 @@ main {
                 "box1 box2 box3"
                 "box4 box5 box6";
             .flavorCover {
-                box-shadow: 2px 2px 2px gray;
                 @include itemStyle;
                 cursor: pointer;
                 gap: 0.75rem;
                 font-size: 1.25rem;
+                transition-duration: .5s;
+                transition-property: box-shadow;
+                &:hover {
+                    box-shadow: 2px 2px 2px gray;
+                }
+                &:active {
+                    box-shadow: inset 2px 2px 2px gray;
+                }
             }
             .flavorDetail {
                 box-shadow: inset 2px 2px 2px gray;
@@ -101,6 +108,8 @@ main {
                         background-color: rgba(176, 0, 235, 0.3);
                         cursor: pointer;
                         margin-right: .25rem;
+                        transition-duration: .25s;
+                        transition-property: background-color color;
                         &:hover {
                             background-color: rgba(193, 0, 193, 0.75);
                             color: white;
@@ -110,6 +119,8 @@ main {
                         background-color: rgba(255, 255, 27, 0.3);
                         cursor: pointer;
                         margin-right: .25rem;
+                        transition-duration: .25s;
+                        transition-property: background-color color;
                         &:hover {
                             background-color: rgba(147, 110, 0, 0.75);
                             color: white;
@@ -118,6 +129,8 @@ main {
                     .btn-gray {
                         background-color: rgba(128, 128, 128, 0.3);
                         cursor: pointer;
+                        transition-duration: .25s;
+                        transition-property: background-color color;
                         &:hover {
                             background-color: gray;
                             color: white;
@@ -128,7 +141,7 @@ main {
         }
     }
     #orderList {
-        width: 25vw;
+        width: 28vw;
         @include cardStyle;
         display: flex;
         flex-direction: column;
@@ -139,6 +152,47 @@ main {
             font-family: $primaryFont;
             color: rgba(128, 128, 128, 0.75);
             font-size: 2.5rem;
+            margin-bottom: 3.5rem;
+        }
+        .order {
+            @include flex-center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            .order-2 {
+                width: 10vw;
+                display: flex;
+                flex-direction: column;
+                gap: .25rem;
+                .input {
+                    display: flex;
+                    align-items: center;
+                    gap: .25rem;
+                    input {
+                        width: 2.5rem;
+                    }
+                }
+            }
+            .order-3 {
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+                .updateBtn {
+                    background-color: rgba(0, 128, 0, 0.3);
+                    cursor: pointer;
+                    &:hover {
+                        background-color: rgba(0, 128, 0, 0.85);
+                        color: white;
+                    }
+                }
+                .removeBtn {
+                    background-color: rgba(224, 0, 30, 0.3);
+                    cursor: pointer;
+                    &:hover {
+                        background-color: rgba(224, 0, 30, 0.75);
+                        color: white;
+                    }
+                }
+            }
         }
     }
 }
