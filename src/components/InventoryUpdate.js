@@ -32,5 +32,5 @@ InventoryUpdate.propTypes = {
     flavor: PropTypes.string.isRequired,
     quantity: PropTypes.number,
     onClickUpdate: PropTypes.func,
-    onClickdone: PropTypes.func
+    onClickDone: PropTypes.func
 }

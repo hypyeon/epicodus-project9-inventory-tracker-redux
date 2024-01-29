@@ -62,7 +62,7 @@ export default class InventoryControl extends React.Component {
         });
     }
     handleAddBtn = (item) => {
-        const { itemToAddStock, inStockValues } = this.state;
+        const { itemToAddStock } = this.state;
         let alreadyHasIt = false;
         for (let i = 0; i < itemToAddStock.length; i++) {
             if (itemToAddStock[i]["id"] === item.id) {
