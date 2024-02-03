@@ -3,11 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './css/index.css';
 import App from './components/App';
 import reportWebVitals from './components/reportWebVitals';
+import { legacy_createStore as createStore } from 'redux';
+import reducer from './reducers/item-list-reducer';
+import { Provider } from 'react-redux';
+
+const store = createStore(reducer);
+
+store.subscribe(() => 
+  console.log(store.getState())
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

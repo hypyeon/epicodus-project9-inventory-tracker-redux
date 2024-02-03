@@ -2,10 +2,13 @@ import React from 'react';
 import { inventoryItems } from './InventoryList';
 import { ItemCover, ItemDetail } from './ItemCreator';
 import InventoryUpdate from './InventoryUpdate';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 export default class InventoryControl extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
 
         const defaultStockValues = {};
         [...inventoryItems].forEach((item) => {
@@ -19,7 +22,7 @@ export default class InventoryControl extends React.Component {
 
         this.state = {
             detailRequested: {},
-            itemToAddStock: [],
+            // itemToAddStock: [],
             inStockValues: defaultStockValues,
             quantity: quantityToAdd
         };
@@ -62,6 +65,7 @@ export default class InventoryControl extends React.Component {
         });
     }
     handleAddBtn = (item) => {
+        /* 
         const { itemToAddStock } = this.state;
         let alreadyHasIt = false;
         for (let i = 0; i < itemToAddStock.length; i++) {
@@ -81,6 +85,18 @@ export default class InventoryControl extends React.Component {
                 itemToAddStock: itemToAddStock
             });
         }
+        */
+        const { dispatch } = this.props;
+        const { id, flavor, price, inStock, popularity } = item;
+        const action = {
+            type: 'ADD_ITEM',
+            id: id,
+            flavor: flavor,
+            price: price,
+            inStock: inStock,
+            popularity: popularity
+        }
+        dispatch(action);
     }
     handleUpdateBtn = (item) => {
         this.handleAddBucket(item);
@@ -111,19 +127,22 @@ export default class InventoryControl extends React.Component {
         });
     }
     handleDoneBtn = (item) => {
-        this.setState((prevState) => {
-            const { itemToAddStock } = prevState;
-
-            const updatedItemToAddStock = itemToAddStock.filter((currentItem) => currentItem !== item);
-
-            return {
-                itemToAddStock: updatedItemToAddStock,
-            };
-        });
+        const { dispatch } = this.props;
+        const { id, flavor, price, inStock, popularity } = item;
+        const action = {
+            type: 'REMOVE_ITEM',
+            id: id,
+            flavor: flavor,
+            price: price,
+            inStock: inStock,
+            popularity: popularity
+        }
+        dispatch(action);
     }
 
     render() {
-        const { detailRequested, itemToAddStock, inStockValues, quantity } = this.state;
+        const { detailRequested, inStockValues, quantity } = this.state;
+        const { itemToAddStock } = this.props;
 
         const inventoryList = inventoryItems.map((item) => {
             const isDetailVisible = detailRequested[item.flavor];
@@ -181,3 +200,15 @@ export default class InventoryControl extends React.Component {
         )
     }
 }
+
+InventoryControl.propTypes = {
+    itemToAddStock: PropTypes.array
+}
+
+const mapStateToProps = state => {
+    return {
+        itemToAddStock: state
+    }
+}
+
+InventoryControl = connect(mapStateToProps)(InventoryControl);
