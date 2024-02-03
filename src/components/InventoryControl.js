@@ -69,6 +69,7 @@ export default class InventoryControl extends React.Component {
                 alreadyHasIt = true;
                 break;
             }
+            // this is to see if "Add Items" section already has the same id item - to avoid having multiple of the same flavor item under the section. Without this, the section will have unlimited amount of flavor list upon clicking "Add". 
         }
         if (!alreadyHasIt) {
             const updatedItemToAddStock = [...itemToAddStock, item];
