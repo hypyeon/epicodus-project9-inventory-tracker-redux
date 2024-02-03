@@ -12,6 +12,8 @@ const reducer = (state = [], action) => {
           popularity: popularity
         }
       ];
+    case 'REMOVE_ITEM':
+      return state.filter(item => item.id !== id);
     default: 
       return state;
   }
