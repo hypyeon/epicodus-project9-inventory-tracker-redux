@@ -8,7 +8,15 @@ const reducer = (state = {}, action) => {
         price: price,
         inStock: inStock + 130,
         popularity: popularity
-      })
+      });
+    case 'SELL_ITEM':
+      return Object.assign({}, state, {
+        id: id,
+        flavor: flavor,
+        price: price,
+        inStock: inStock - 1,
+        popularity: popularity
+      });
     default: 
       return state;
   }

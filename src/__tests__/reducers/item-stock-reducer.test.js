@@ -35,4 +35,24 @@ describe('itemStockReducer', () => {
     });
   });
 
+  test('Should successfully decrement the inStock value by 1', () => {
+    const { id, flavor, price, inStock, popularity } = itemData;
+    action = {
+      type: 'SELL_ITEM',
+      id: id,
+      flavor: flavor,
+      price: price, 
+      inStock: inStock, 
+      popularity: popularity
+    };
+
+    expect(itemStockReducer({}, action)).toEqual({
+      id: id,
+      flavor: flavor,
+      price: price, 
+      inStock: inStock - 1, 
+      popularity: popularity
+    });
+  });
+
 });
