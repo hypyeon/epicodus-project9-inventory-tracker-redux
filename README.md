@@ -6,9 +6,8 @@ By [Hayeong Pyeon](https://www.hayeong.website)
 1. [Technologies Used](#technologies-used)
 2. [Description](#description)
 3. [Setup Requirements](#setup-requirements)
-4. [Github Pages](#github-pages)
-5. [Known Bugs](#known-bugs)
-6. [License](#license)
+4. [Known Bugs](#known-bugs)
+5. [License](#license)
 
 ## Technologies used
 - HTML, SCSS, JavaScript
@@ -27,11 +26,8 @@ By [Hayeong Pyeon](https://www.hayeong.website)
 4. Run tests with `npm test`.
 - Test suites located in the `__tests__` directory. 
 
-## Github Pages
-*to be updated*
-
 ## Known Bugs
-*under development as of Feb 03, 2024*
+- No known bugs found as of Feb 04, 2024
 
 ## License
 [MIT](/LICENSE.txt) Copyright © 2024 Hayeong Pyeon
