@@ -4,6 +4,7 @@ import { ItemCover, ItemDetail } from './ItemCreator';
 import InventoryUpdate from './InventoryUpdate';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as a from './../actions';
 
 export default class InventoryControl extends React.Component {
     constructor(props) {
@@ -87,20 +88,11 @@ export default class InventoryControl extends React.Component {
         }
         */
         const { dispatch } = this.props;
-        const { id, flavor, price, inStock, popularity } = item;
-        const action = {
-            type: 'ADD_ITEM',
-            id: id,
-            flavor: flavor,
-            price: price,
-            inStock: inStock,
-            popularity: popularity
-        }
+        const action = a.addItem(item);
         dispatch(action);
     }
     handleUpdateBtn = (item) => {
         this.handleAddBucket(item);
-
         const { inStockValues } = this.state;
 
         const updatedValues = { ...inStockValues };
@@ -128,15 +120,7 @@ export default class InventoryControl extends React.Component {
     }
     handleDoneBtn = (item) => {
         const { dispatch } = this.props;
-        const { id, flavor, price, inStock, popularity } = item;
-        const action = {
-            type: 'REMOVE_ITEM',
-            id: id,
-            flavor: flavor,
-            price: price,
-            inStock: inStock,
-            popularity: popularity
-        }
+        const action = a.removeItem(item);
         dispatch(action);
     }
 
@@ -174,7 +158,7 @@ export default class InventoryControl extends React.Component {
             itemList = itemToAddStock.map((item) => (
                 <InventoryUpdate 
                     key={item.id}
-                    flavor={item.flavor} 
+                    flavor={item.flavor}
                     quantity={quantity[item.id]}
                     onClickUpdate={() => this.handleUpdateBtn(item)}
                     onClickDone={() => this.handleDoneBtn(item)}

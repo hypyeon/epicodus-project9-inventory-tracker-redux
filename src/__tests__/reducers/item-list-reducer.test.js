@@ -1,4 +1,5 @@
 import itemListReducer from '../../reducers/item-list-reducer';
+import * as c from '../../actions/ActionTypes';
 
 describe('itemListReducer', () => {
 
@@ -9,6 +10,7 @@ describe('itemListReducer', () => {
     flavor: 'Chocolate',
     price: 0.75, 
     inStock: 0, 
+    qtyAdded: 0,
     popularity: "High"
   }
 
@@ -36,11 +38,11 @@ describe('itemListReducer', () => {
   test('Should successfully add new item data to itemToAddStock array', () => {
     const { id, flavor, price, inStock, popularity } = itemData;
     action = { 
-      type: 'ADD_ITEM',
+      type: c.ADD_ITEM,
       id: id,
       flavor: flavor,
-      price: price, 
-      inStock: inStock, 
+      price: price,
+      inStock: inStock,
       popularity: popularity
     };
 
@@ -48,8 +50,8 @@ describe('itemListReducer', () => {
       {
         id: id,
         flavor: flavor,
-        price: price, 
-        inStock: inStock, 
+        price: price,
+        inStock: inStock,
         popularity: popularity
       }
     ]);
@@ -57,7 +59,7 @@ describe('itemListReducer', () => {
 
   test('Should successfully remove item from itemToAddStock array', () => {
     action = {
-      type: 'REMOVE_ITEM',
+      type: c.REMOVE_ITEM,
       id: 2,
       flavor: 'Cherry',
       price: 1.25, 
@@ -74,5 +76,5 @@ describe('itemListReducer', () => {
       }
     ]);
   });
-  
+
 });
